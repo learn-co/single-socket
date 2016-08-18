@@ -1,4 +1,4 @@
-# single-sock package
+# single-socket package
 
 A short description of your package.
 

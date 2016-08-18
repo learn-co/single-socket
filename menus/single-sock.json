@@ -2,8 +2,8 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Toggle single-sock",
-        "command": "single-sock:toggle"
+        "label": "Toggle single-socket",
+        "command": "single-socket:toggle"
       }
     ]
   },
@@ -12,11 +12,11 @@
       "label": "Packages",
       "submenu": [
         {
-          "label": "single-sock",
+          "label": "single-socket",
           "submenu": [
             {
               "label": "Toggle",
-              "command": "single-sock:toggle"
+              "command": "single-socket:toggle"
             }
           ]
         }
