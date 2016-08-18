@@ -1,5 +1,5 @@
 {
   "atom-workspace": {
-    "ctrl-alt-o": "single-sock:toggle"
+    "ctrl-alt-o": "single-sock:init"
   }
 }

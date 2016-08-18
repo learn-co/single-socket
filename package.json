@@ -3,16 +3,13 @@
   "main": "./lib/single-sock",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "keywords": [
-  ],
-  "activationCommands": {
-    "atom-workspace": "single-sock:toggle"
-  },
+  "keywords": [],
   "repository": "https://github.com/atom/single-sock",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+    "websocket": "1.0.23"
   }
 }
