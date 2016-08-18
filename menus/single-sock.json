@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle single-sock",
+        "command": "single-sock:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "single-sock",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "single-sock:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
