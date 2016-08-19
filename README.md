@@ -1,5 +1,37 @@
-# single-socket package
+# SingleSocket
 
-A short description of your package.
+Share a single websocket connection through a proxy server
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+## How It Works
+
+SingleSocket uses a local proxy websocket server to route clients through a single connection.
+
+## Install
+
+`npm install single-socket --save`
+
+## Usage
+
+```javascript
+const SingleSocket = require('single-socket')
+
+var client = new SingleSocket('ws://echo.websocket.org')
+
+client.onerror = function() {
+  console.log('Connection Error')
+}
+
+client.onopen = function() {
+  console.log('Client Connected')
+}
+
+client.onclose = function() {
+  console.log('Client Closed');
+}
+
+client.onmessage = function(e) {
+  if (typeof e.data === 'string') {
+      console.log("Received: '" + e.data + "'");
+  }
+}
+```

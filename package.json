@@ -2,7 +2,7 @@
   "name": "single-socket",
   "main": "./lib/single-socket",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "Share a single websocket connection through a proxy server",
   "keywords": [],
   "repository": "https://github.com/learn-co/single-socket",
   "license": "MIT",
