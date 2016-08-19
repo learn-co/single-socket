@@ -1,6 +1,6 @@
 # SingleSocket
 
-Share a single websocket connection through a proxy server
+Share a single websocket connection across Node processes.
 
 ## How It Works
 
