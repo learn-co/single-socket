@@ -4,13 +4,9 @@
   "version": "0.0.0",
   "description": "A short description of your package",
   "keywords": [],
-  "repository": "https://github.com/atom/single-socket",
+  "repository": "https://github.com/learn-co/single-socket",
   "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
-  },
   "dependencies": {
-    "messenger": "0.0.9",
     "websocket": "1.0.23"
   }
 }
