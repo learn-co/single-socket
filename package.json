@@ -7,6 +7,7 @@
   "repository": "https://github.com/learn-co/single-socket",
   "license": "MIT",
   "dependencies": {
-    "websocket": "1.0.23"
+    "websocket": "1.0.23",
+    "ws": "^1.1.1"
   }
 }
