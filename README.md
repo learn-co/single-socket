@@ -1,5 +1,7 @@
 # SingleSocket
 
+> Note: This project is experimental for now and still under active development
+
 Share a single websocket connection across Node processes.
 
 ## How It Works
