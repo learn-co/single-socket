@@ -7,6 +7,8 @@
   "repository": "https://github.com/learn-co/single-socket",
   "license": "MIT",
   "dependencies": {
+    "dnode": "^1.2.2",
+    "underscore": "^1.8.3",
     "websocket": "1.0.23"
   }
 }
