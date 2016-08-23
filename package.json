@@ -6,9 +6,16 @@
   "keywords": [],
   "repository": "https://github.com/learn-co/single-socket",
   "license": "MIT",
+  "scripts": {
+    "test": "mocha test/test.js"
+  },
   "dependencies": {
-    "dnode": "^1.2.2",
-    "underscore": "^1.8.3",
+    "dnode": "1.2.2",
     "websocket": "1.0.23"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "mocha": "3.0.2",
+    "sinon": "1.17.5"
   }
 }
