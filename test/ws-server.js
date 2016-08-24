@@ -25,5 +25,5 @@ wsServer.on('connect', function(connection) {
     console.log('test ws server received message: ', message)
   })
 
-  connection.send({ping: 'pong'})
+  connection.send(JSON.stringify({ping: 'pong'}))
 })
