@@ -1,5 +1,6 @@
 const path = require('path')
 const fork = require('child_process').fork
+const Websocket = require('websocket').w3cwebsocket
 
 global.log = function log() {
   console.log.apply(arguments)
@@ -8,28 +9,59 @@ global.log = function log() {
 before(function(done) {
   var port = 8001
 
-  this.startServer = function() {
+  this.startServer = function(cb) {
+    cb || (cb = function() { })
+
     log('starting test websocket server on port ' + port)
+
     if (!this.wsServer) {
       this.wsServer = fork(path.join(__dirname, 'ws-server.js'), [port])
     }
-  }
 
-  this.stopServer = function() {
-    log('killing test websocket server')
-    if (this.wsServer) {
-      this.wsServer.kill()
-      this.wsServer = null
+    connect.call(this)
+
+    function connect() {
+      this.testServerWS = new Websocket('ws://localhost:' + port)
+
+      this.testServerWS.onopen = cb
+
+      this.testServerWS.onerror = function(err) {
+        connect()
+      }
     }
   }
 
-  this.startServer()
+  this.stopServer = function(cb) {
+    cb || (cb = function() { })
 
-  setTimeout(done, 1500)
+    if (!this.wsServer) {
+      cb()
+      return
+    }
+
+    console.log('setting callback!!!!!!')
+    log('killing test websocket server')
+
+    var self = this
+    this.wsServer.on('close', function() {
+      console.log('child process closed')
+      cb()
+      self.wsServer = null
+    })
+
+    this.wsServer.kill()
+
+  }
+
+  this.startServer(function() {
+    done()
+  })
 })
 
-after(function() {
-  this.stopServer()
+after(function(done) {
+  this.stopServer(function() {
+    done()
+  })
 })
 
 require('./single-socket')
