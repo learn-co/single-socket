@@ -19,10 +19,10 @@ var wsServer = new WebSocketServer({
 })
 
 wsServer.on('connect', function(connection) {
-  console.log('cliented connected on server')
+  console.log('cliented connected to test ws server')
 
   connection.on('message', function(message) {
-    console.log('message: ', message)
+    console.log('test ws server received message: ', message)
   })
 
   connection.send({ping: 'pong'})

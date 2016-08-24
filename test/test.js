@@ -3,7 +3,7 @@ const fork = require('child_process').fork
 const Websocket = require('websocket').w3cwebsocket
 
 global.log = function log() {
-  console.log.apply(arguments)
+  console.log.bind(console).apply(arguments)
 }
 
 before(function(done) {
@@ -39,12 +39,11 @@ before(function(done) {
       return
     }
 
-    console.log('setting callback!!!!!!')
     log('killing test websocket server')
 
     var self = this
+
     this.wsServer.on('close', function() {
-      console.log('child process closed')
       cb()
       self.wsServer = null
     })

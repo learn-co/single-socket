@@ -2,37 +2,33 @@ const SingleSocket = require('../lib/single-socket')
 const expect = require('chai').expect
 const sinon = require('sinon')
 
-// xit('connects to the target ws server', function(done) {
-  // this.timeout(5000)
-  // var spy = sinon.spy()
+it('connects to the target ws server', function(done) {
+  this.timeout(10000)
+  var spy = sinon.spy()
 
-  // var socket = new SingleSocket('ws://localhost:8001', {
-    // onopen: function() {
-      // spy()
-      // expect(spy.calledOnce).to.be.true
-      // done()
-    // }
-  // })
-// })
+  var socket = new SingleSocket('ws://localhost:8001', {
+    onopen: function() {
+      spy()
+      expect(spy.calledOnce).to.be.true
+      done()
+    }
+  })
+})
 
 it('calls onerror when theres an error with the websocket connection', function(done) {
   this.timeout(10000)
   var self = this
 
   this.stopServer(function() {
-    console.log('jaksdfjlaskdjflaksdjflkasdjfklasdjfklasjdl')
     var socket = new SingleSocket('ws://localhost:8001', {
       onerror: function(err) {
-        log('wuuuu')
-        log(err)
-        expect(err).to.be.an('error')
+        expect(err.type).to.equal('error')
         self.startServer(function() {
           done()
         })
       }
     })
   })
-
 })
 
 // it('receives messages', function(done) {
