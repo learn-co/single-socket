@@ -17,23 +17,22 @@ SingleSocket uses a local [dnode](https://github.com/substack/dnode) server to r
 ```javascript
 const SingleSocket = require('single-socket')
 
-var client = new SingleSocket('ws://echo.websocket.org')
+var client = new SingleSocket('ws://echo.websocket.org', {
+  onerror: function(err) {
+    console.error(err)
+  },
 
-client.onerror = function() {
-  console.log('Connection Error')
-}
+  onopen: function() {
+    console.log('Client Connected')
+  },
 
-client.onopen = function() {
-  console.log('Client Connected')
-}
+  onclose: function() {
+    console.log('Client Closed')
+  },
 
-client.onclose = function() {
-  console.log('Client Closed');
-}
-
-client.onmessage = function(e) {
-  if (typeof e.data === 'string') {
-      console.log("Received: '" + e.data + "'");
+  onmessage = function(msg) {
+    console.log(msg)
   }
-}
+})
+
 ```
