@@ -19,11 +19,11 @@ it('calls onerror when theres an error with the websocket connection', function(
   this.timeout(10000)
   var self = this
 
-  this.stopServer(function() {
+  this.stopServer().then(function() {
     var socket = new SingleSocket('ws://localhost:8001', {
       onerror: function(err) {
         expect(err.type).to.equal('error')
-        self.startServer(function() {
+        self.startServer().then(function() {
           done()
         })
       }
