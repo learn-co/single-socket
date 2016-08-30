@@ -36,9 +36,6 @@ it('receives messages', function(done) {
 
   var socket = new SingleSocket('ws://localhost:8001', {
     onmessage: function(msg) {
-      // this response is hard coded as a response
-      // on open connections to the test ws server
-      // in `test/ws-server`
       msg = JSON.parse(msg)
       expect(msg.ping).to.equal('pong')
       done()
