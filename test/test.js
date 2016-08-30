@@ -1,6 +1,7 @@
 const path = require('path')
 const fork = require('child_process').fork
 const Websocket = require('websocket').w3cwebsocket
+const shell = require('shelljs')
 
 global.log = function log() {
   console.log.bind(console).apply(arguments)
@@ -56,6 +57,8 @@ before(function(done) {
 })
 
 after(function(done) {
+  var pid = shell.exec('ps aux | grep single-socket/lib/server.js | grep -v grep | awk \'{print $2}\'').stdout
+  shell.exec('kill ' + pid)
   this.stopServer().then(function() {
     done()
   })
