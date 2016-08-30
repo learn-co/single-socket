@@ -3,17 +3,11 @@ const fork = require('child_process').fork
 const Websocket = require('websocket').w3cwebsocket
 const shell = require('shelljs')
 
-global.log = function log() {
-  console.log.bind(console).apply(arguments)
-}
-
 before(function(done) {
   var port = 8001
 
   this.startServer = function() {
     return new Promise(function(resolve, reject) {
-      log('starting test websocket server on port ' + port)
-
       if (!this.wsServer) {
         this.wsServer = fork(path.join(__dirname, 'ws-server.js'), [port])
       }
@@ -37,8 +31,6 @@ before(function(done) {
       if (!this.wsServer) {
         return resolve()
       }
-
-      log('killing test websocket server')
 
       var self = this
 
