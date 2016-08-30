@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "dnode": "1.2.2",
+    "lodash.clone": "^4.5.0",
     "websocket": "1.0.23"
   },
   "devDependencies": {

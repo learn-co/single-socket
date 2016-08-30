@@ -49,8 +49,8 @@ before(function(done) {
 })
 
 after(function(done) {
-  var pid = shell.exec('ps aux | grep single-socket/lib/server.js | grep -v grep | awk \'{print $2}\'').stdout
-  shell.exec('kill ' + pid)
+  var pids = shell.exec('ps aux | grep single-socket/lib/server.js | grep -v grep | awk \'{print $2}\'').stdout
+  shell.exec('kill ' + pids.split('\n').join(' '))
   this.stopServer().then(function() {
     done()
   })
