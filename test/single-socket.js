@@ -62,5 +62,10 @@ it('closes when the websocket closes', function(done) {
       })
     }
   })
+})
 
+xit('allows you to specify the port the start the dnode server', function() {
+})
+
+xit('shuts down the dnode server when the last client disconnects', function() {
 })
