@@ -42,3 +42,25 @@ it('receives messages', function(done) {
     }
   })
 })
+
+it('closes when the websocket closes', function(done) {
+  this.timeout(10000)
+  var spy = sinon.spy()
+
+  var self = this
+
+  var socket = new SingleSocket('ws://localhost:8001', {
+    onopen: function() {
+      self.stopServer()
+    },
+
+    onclose: function(msg) {
+      spy()
+      expect(spy.calledOnce).to.be.true
+      self.startServer().then(function() {
+        done()
+      })
+    }
+  })
+
+})
