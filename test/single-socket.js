@@ -1,6 +1,7 @@
 const SingleSocket = require('../lib/single-socket')
 const expect = require('chai').expect
 const sinon = require('sinon')
+const dnode = require('dnode')
 
 it('connects to the target ws server', function(done) {
   this.timeout(10000)
@@ -68,7 +69,28 @@ it('closes when the websocket closes', function(done) {
   })
 })
 
-xit('allows you to specify the port the start the dnode server', function() {
+it('allows you to specify the port the start the dnode server', function(done) {
+  this.timeout(10000)
+
+  var port = 9000
+  var spy = sinon.spy()
+
+  var socket = new SingleSocket('ws://localhost:8001', {
+    onopen: function() {
+      checkIfDnodeServerIsRunning(port)
+    },
+    port: port
+  })
+
+  function checkIfDnodeServerIsRunning(port) {
+    var client = dnode({}, {weak: false}).connect(port)
+
+    client.on('remote', function(remote) {
+      spy()
+      expect(spy.calledOnce).to.be.true
+      done()
+    })
+  }
 })
 
 xit('shuts down the dnode server when the last client disconnects', function() {
