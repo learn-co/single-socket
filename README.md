@@ -35,4 +35,5 @@ var client = new SingleSocket('ws://echo.websocket.org', {
   }
 })
 
+client.send('hello world')
 ```
