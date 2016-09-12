@@ -3,16 +3,30 @@ const expect = require('chai').expect
 const sinon = require('sinon')
 const dnode = require('dnode')
 
-it('connects to the target ws server', function(done) {
-  this.timeout(10000)
-  var spy = sinon.spy()
+describe('connnecting and closing', function() {
+  before(function(done) {
+    this.timeout(10000)
+    this.spy = sinon.spy()
 
-  var socket = new SingleSocket('ws://localhost:8001', {
-    onopen: function() {
+    this.socket = new SingleSocket('ws://localhost:8001', {
+      onopen: () => {
+        this.spy()
+        done()
+      }
+    })
+  })
+
+  it('connects to the target ws server', function() {
+    expect(this.spy.calledOnce).to.be.true
+  })
+
+  it('closes', function(done) {
+    var spy = sinon.spy()
+    this.socket.close().then(function() {
       spy()
       expect(spy.calledOnce).to.be.true
       done()
-    }
+    })
   })
 })
 
