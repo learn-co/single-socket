@@ -86,5 +86,5 @@ it('closes when the websocket closes', function(done) {
   })
 })
 
-it('the server shuts down when all clients have disconnected', function() {
+xit('the server shuts down when all clients have disconnected', function() {
 })
