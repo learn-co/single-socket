@@ -5,7 +5,6 @@ const dnode = require('dnode')
 
 describe('connnecting and closing', function() {
   before(function(done) {
-    this.timeout(10000)
     this.spy = sinon.spy()
 
     this.socket = new SingleSocket('ws://localhost:8001')
@@ -22,7 +21,6 @@ describe('connnecting and closing', function() {
   })
 
   it('can close the websocket', function(done) {
-    this.timeout(10000)
     var spy = sinon.spy()
 
     this.socket.on('close', () => {
@@ -37,7 +35,6 @@ describe('connnecting and closing', function() {
 })
 
 it('calls onerror when theres an error with the websocket connection', function(done) {
-  this.timeout(10000)
   var self = this
 
   this.stopServer().then(function() {
@@ -53,8 +50,6 @@ it('calls onerror when theres an error with the websocket connection', function(
 })
 
 it('receives messages', function(done) {
-  this.timeout(10000)
-
   var socket = new SingleSocket('ws://localhost:8001')
 
   socket.on('message', function(msg) {
@@ -65,8 +60,6 @@ it('receives messages', function(done) {
 })
 
 it('closes when the websocket closes', function(done) {
-  this.timeout(10000)
-
   var spy = sinon.spy()
 
   var self = this
