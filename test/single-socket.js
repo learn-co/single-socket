@@ -59,6 +59,20 @@ it('receives messages', function(done) {
   })
 })
 
+it('sends messages', function(done) {
+  var socket = new SingleSocket('ws://localhost:8001')
+
+  socket.on('open', function() {
+    socket.send('ping')
+  })
+
+  socket.on('message', function(msg) {
+    if (msg === 'pong') {
+      done()
+    }
+  })
+})
+
 it('closes when the websocket closes', function(done) {
   var spy = sinon.spy()
 

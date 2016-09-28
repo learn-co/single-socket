@@ -16,7 +16,5 @@ var wsServer = new WebSocketServer({
 })
 
 wsServer.on('connect', function(connection) {
-  setInterval(function() {
-    connection.send(JSON.stringify({ping: 'pong'}))
-  }, 1000)
+  connection.send(JSON.stringify({ping: 'pong'}))
 })
