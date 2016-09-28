@@ -22,6 +22,7 @@ describe('connnecting and closing', function() {
   })
 
   it('can close the websocket', function(done) {
+    this.timeout(10000)
     var spy = sinon.spy()
 
     this.socket.on('close', () => {
