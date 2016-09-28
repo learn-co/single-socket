@@ -30,21 +30,21 @@ describe('connnecting and closing', function() {
   // })
 })
 
-// it('calls onerror when theres an error with the websocket connection', function(done) {
-  // this.timeout(10000)
-  // var self = this
+it('calls onerror when theres an error with the websocket connection', function(done) {
+  this.timeout(10000)
+  var self = this
 
-  // this.stopServer().then(function() {
-    // var socket = new SingleSocket('ws://localhost:8001', {
-      // onerror: function(err) {
-        // expect(err.type).to.equal('error')
-        // self.startServer().then(function() {
-          // done()
-        // })
-      // }
-    // })
-  // })
-// })
+  this.stopServer().then(function() {
+    var socket = new SingleSocket('ws://localhost:8001')
+
+    socket.on('error', function(err) {
+      expect(err.code).to.equal('ECONNREFUSED')
+      self.startServer().then(function() {
+        done()
+      })
+    })
+  })
+})
 
 // it('receives messages', function(done) {
   // this.timeout(10000)
