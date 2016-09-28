@@ -46,17 +46,17 @@ it('calls onerror when theres an error with the websocket connection', function(
   })
 })
 
-// it('receives messages', function(done) {
-  // this.timeout(10000)
+it('receives messages', function(done) {
+  this.timeout(10000)
 
-  // var socket = new SingleSocket('ws://localhost:8001', {
-    // onmessage: function(msg) {
-      // msg = JSON.parse(msg)
-      // expect(msg.ping).to.equal('pong')
-      // done()
-    // }
-  // })
-// })
+  var socket = new SingleSocket('ws://localhost:8001')
+
+  socket.on('message', function(msg) {
+    msg = JSON.parse(msg)
+    expect(msg.ping).to.equal('pong')
+    done()
+  })
+})
 
 it('closes when the websocket closes', function(done) {
   this.timeout(10000)
