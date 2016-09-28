@@ -10,8 +10,7 @@
     "test": "mocha test/test.js"
   },
   "dependencies": {
-    "dnode": "1.2.2",
-    "node-ipc": "^8.1.1",
+    "node-ipc": "8.1.1",
     "ws": "1.1.1"
   },
   "devDependencies": {
