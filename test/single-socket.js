@@ -49,17 +49,7 @@ it('calls onerror when theres an error with the websocket connection', function(
   })
 })
 
-it('receives messages', function(done) {
-  var socket = new SingleSocket('ws://localhost:8001')
-
-  socket.on('message', function(msg) {
-    msg = JSON.parse(msg)
-    expect(msg.ping).to.equal('pong')
-    done()
-  })
-})
-
-it('sends messages', function(done) {
+it('sends and receives messages', function(done) {
   var socket = new SingleSocket('ws://localhost:8001')
 
   socket.on('open', function() {
