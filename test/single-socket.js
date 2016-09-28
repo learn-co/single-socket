@@ -8,11 +8,11 @@ describe('connnecting and closing', function() {
     this.timeout(10000)
     this.spy = sinon.spy()
 
-    this.socket = new SingleSocket('ws://localhost:8001', {
-      onopen: () => {
-        this.spy()
-        done()
-      }
+    this.socket = new SingleSocket('ws://localhost:8001')
+
+    this.socket.on('open', () => {
+      this.spy()
+      done()
     })
   })
 
@@ -20,14 +20,14 @@ describe('connnecting and closing', function() {
     expect(this.spy.calledOnce).to.be.true
   })
 
-  it('closes', function(done) {
-    var spy = sinon.spy()
-    this.socket.close().then(function() {
-      spy()
-      expect(spy.calledOnce).to.be.true
-      done()
-    })
-  })
+  // it('closes', function(done) {
+    // var spy = sinon.spy()
+    // this.socket.close().then(function() {
+      // spy()
+      // expect(spy.calledOnce).to.be.true
+      // done()
+    // })
+  // })
 })
 
 // it('calls onerror when theres an error with the websocket connection', function(done) {
@@ -58,30 +58,30 @@ describe('connnecting and closing', function() {
   // })
 // })
 
-// it('closes when the websocket closes', function(done) {
-  // this.timeout(10000)
+it('closes when the websocket closes', function(done) {
+  this.timeout(10000)
 
-  // var spy = sinon.spy()
+  var spy = sinon.spy()
 
-  // var self = this
-  // var stoppingServer;
+  var self = this
+  var stoppingServer;
 
-  // var socket = new SingleSocket('ws://localhost:8001', {
-    // onopen: function() {
-      // stoppingServer = self.stopServer()
-    // },
+  var socket = new SingleSocket('ws://localhost:8001')
 
-    // onclose: function(msg) {
-      // spy()
-      // expect(spy.calledOnce).to.be.true
-      // stoppingServer.then(function() {
-        // self.startServer().then(function() {
-          // done()
-        // })
-      // })
-    // }
-  // })
-// })
+  socket.on('open', () => {
+    stoppingServer = self.stopServer()
+  })
+
+  socket.on('close', () => {
+    spy()
+    expect(spy.calledOnce).to.be.true
+    stoppingServer.then(function() {
+      self.startServer().then(function() {
+        done()
+      })
+    })
+  })
+})
 
 // it('allows you to specify the port the start the dnode server', function(done) {
   // this.timeout(10000)
