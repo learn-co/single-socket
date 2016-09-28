@@ -18,16 +18,21 @@ describe('connnecting and closing', function() {
 
   it('connects to the target ws server', function() {
     expect(this.spy.calledOnce).to.be.true
+    expect(this.socket.socket).to.be.defined
   })
 
-  // it('closes', function(done) {
-    // var spy = sinon.spy()
-    // this.socket.close().then(function() {
-      // spy()
-      // expect(spy.calledOnce).to.be.true
-      // done()
-    // })
-  // })
+  it('can close the websocket', function(done) {
+    var spy = sinon.spy()
+
+    this.socket.on('close', () => {
+      spy()
+      expect(spy.calledOnce).to.be.true
+      expect(this.socket.socket).to.be.undefined
+      done()
+    })
+
+    this.socket.close()
+  })
 })
 
 it('calls onerror when theres an error with the websocket connection', function(done) {
@@ -83,29 +88,5 @@ it('closes when the websocket closes', function(done) {
   })
 })
 
-// it('allows you to specify the port the start the dnode server', function(done) {
-  // this.timeout(10000)
-
-  // var port = 9000
-  // var spy = sinon.spy()
-
-  // var socket = new SingleSocket('ws://localhost:8001', {
-    // onopen: function() {
-      // checkIfDnodeServerIsRunning(port)
-    // },
-    // port: port
-  // })
-
-  // function checkIfDnodeServerIsRunning(port) {
-    // var client = dnode({}, {weak: false}).connect(port)
-
-    // client.on('remote', function(remote) {
-      // spy()
-      // expect(spy.calledOnce).to.be.true
-      // done()
-    // })
-  // }
-// })
-
-// xit('shuts down the dnode server when the last client disconnects', function() {
-// })
+xit('the server shuts down when all clients have disconnected', function() {
+})
