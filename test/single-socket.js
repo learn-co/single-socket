@@ -30,82 +30,82 @@ describe('connnecting and closing', function() {
   })
 })
 
-it('calls onerror when theres an error with the websocket connection', function(done) {
-  this.timeout(10000)
-  var self = this
+// it('calls onerror when theres an error with the websocket connection', function(done) {
+  // this.timeout(10000)
+  // var self = this
 
-  this.stopServer().then(function() {
-    var socket = new SingleSocket('ws://localhost:8001', {
-      onerror: function(err) {
-        expect(err.type).to.equal('error')
-        self.startServer().then(function() {
-          done()
-        })
-      }
-    })
-  })
-})
+  // this.stopServer().then(function() {
+    // var socket = new SingleSocket('ws://localhost:8001', {
+      // onerror: function(err) {
+        // expect(err.type).to.equal('error')
+        // self.startServer().then(function() {
+          // done()
+        // })
+      // }
+    // })
+  // })
+// })
 
-it('receives messages', function(done) {
-  this.timeout(10000)
+// it('receives messages', function(done) {
+  // this.timeout(10000)
 
-  var socket = new SingleSocket('ws://localhost:8001', {
-    onmessage: function(msg) {
-      msg = JSON.parse(msg)
-      expect(msg.ping).to.equal('pong')
-      done()
-    }
-  })
-})
+  // var socket = new SingleSocket('ws://localhost:8001', {
+    // onmessage: function(msg) {
+      // msg = JSON.parse(msg)
+      // expect(msg.ping).to.equal('pong')
+      // done()
+    // }
+  // })
+// })
 
-it('closes when the websocket closes', function(done) {
-  this.timeout(10000)
+// it('closes when the websocket closes', function(done) {
+  // this.timeout(10000)
 
-  var spy = sinon.spy()
+  // var spy = sinon.spy()
 
-  var self = this
-  var stoppingServer;
+  // var self = this
+  // var stoppingServer;
 
-  var socket = new SingleSocket('ws://localhost:8001', {
-    onopen: function() {
-      stoppingServer = self.stopServer()
-    },
+  // var socket = new SingleSocket('ws://localhost:8001', {
+    // onopen: function() {
+      // stoppingServer = self.stopServer()
+    // },
 
-    onclose: function(msg) {
-      spy()
-      expect(spy.calledOnce).to.be.true
-      stoppingServer.then(function() {
-        self.startServer().then(function() {
-          done()
-        })
-      })
-    }
-  })
-})
+    // onclose: function(msg) {
+      // spy()
+      // expect(spy.calledOnce).to.be.true
+      // stoppingServer.then(function() {
+        // self.startServer().then(function() {
+          // done()
+        // })
+      // })
+    // }
+  // })
+// })
 
-it('allows you to specify the port the start the dnode server', function(done) {
-  this.timeout(10000)
+// it('allows you to specify the port the start the dnode server', function(done) {
+  // this.timeout(10000)
 
-  var port = 9000
-  var spy = sinon.spy()
+  // var port = 9000
+  // var spy = sinon.spy()
 
-  var socket = new SingleSocket('ws://localhost:8001', {
-    onopen: function() {
-      checkIfDnodeServerIsRunning(port)
-    },
-    port: port
-  })
+  // var socket = new SingleSocket('ws://localhost:8001', {
+    // onopen: function() {
+      // checkIfDnodeServerIsRunning(port)
+    // },
+    // port: port
+  // })
 
-  function checkIfDnodeServerIsRunning(port) {
-    var client = dnode({}, {weak: false}).connect(port)
+  // function checkIfDnodeServerIsRunning(port) {
+    // var client = dnode({}, {weak: false}).connect(port)
 
-    client.on('remote', function(remote) {
-      spy()
-      expect(spy.calledOnce).to.be.true
-      done()
-    })
-  }
-})
+    // client.on('remote', function(remote) {
+      // spy()
+      // expect(spy.calledOnce).to.be.true
+      // done()
+    // })
+  // }
+// })
 
-xit('shuts down the dnode server when the last client disconnects', function() {
-})
+// xit('shuts down the dnode server when the last client disconnects', function() {
+// })

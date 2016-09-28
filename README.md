@@ -6,7 +6,7 @@ Share a single websocket connection across Node processes.
 
 ## How It Works
 
-SingleSocket uses a local [dnode](https://github.com/substack/dnode) server to route clients through a single websocket connection.
+SingleSocket uses a local socket (via [node-ipc](https://github.com/RIAEvangelist/node-ipc)) to route clients through a single websocket connection.
 
 ## Install
 
