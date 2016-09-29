@@ -1,6 +1,6 @@
 const path = require('path')
 const fork = require('child_process').fork
-const Websocket = require('websocket').w3cwebsocket
+const Websocket = require('ws')
 const shell = require('shelljs')
 
 before(function(done) {
@@ -17,11 +17,11 @@ before(function(done) {
       function connect() {
         this.testServerWS = new Websocket('ws://localhost:' + port)
 
-        this.testServerWS.onopen = resolve
+        this.testServerWS.on('open', resolve)
 
-        this.testServerWS.onerror = function(err) {
+        this.testServerWS.on('error', function(err) {
           connect()
-        }
+        })
       }
     })
   }
