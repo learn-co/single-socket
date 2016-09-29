@@ -1,7 +1,6 @@
 const SingleSocket = require('../lib/single-socket')
 const expect = require('chai').expect
 const sinon = require('sinon')
-const dnode = require('dnode')
 
 describe('connnecting and closing', function() {
   before(function(done) {
