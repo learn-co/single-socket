@@ -1,22 +1,14 @@
 const http = require('http')
-const WebSocketServer = require('websocket').server
+const WebSocketServer = require('ws').Server
 
 var port = process.argv[2]
 
-var server = http.createServer(function(request, response) {
-  response.writeHead(404);
-  response.end();
-})
+var wsServer = new WebSocketServer({ port: port })
 
-server.listen(port)
-
-var wsServer = new WebSocketServer({
-  httpServer: server,
-  autoAcceptConnections: true
-})
-
-wsServer.on('connect', function(connection) {
-  setInterval(function() {
-    connection.send(JSON.stringify({ping: 'pong'}))
-  }, 1000)
+wsServer.on('connection', function(ws) {
+  ws.on('message', function(msg) {
+    if (msg === 'ping') {
+      ws.send('pong')
+    }
+  })
 })
