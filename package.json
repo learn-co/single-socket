@@ -1,7 +1,7 @@
 {
   "name": "single-socket",
   "main": "./lib/single-socket",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Share a single websocket connection through a proxy server",
   "keywords": [],
   "repository": "https://github.com/learn-co/single-socket",
