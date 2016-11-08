@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "node-ipc": "8.8.0",
+    "tmp": "0.0.30",
     "winston": "^2.3.0",
     "ws": "1.1.1"
   },
