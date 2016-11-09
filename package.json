@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "node-ipc": "8.8.0",
+    "winston": "^2.3.0",
     "ws": "1.1.1"
   },
   "devDependencies": {
